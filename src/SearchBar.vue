@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-select
-        v-model="plotSelectedInSearch"
+        v-model="plotOptionSelectedInSearch"
         :options="plotOptions">
     </v-select>
   </div>
@@ -27,10 +27,8 @@ export default {
       return this.geoJson.features
         .filter(feature => feature.geometry.type === 'Point')
         .map((feature) => {
-          // TODO richer labels
-          // TODO select with enter/whatever?
           return {
-            feature,
+            plot: feature,
             label: buildLabel(feature)
           }
         });
@@ -56,14 +54,17 @@ export default {
       }
     },
 
-    plotSelectedInSearch: {
+    plotOptionSelectedInSearch: {
       get() {
-        return this.plotOptions.find(option => option.label === (this.chosenPlot && this.chosenPlot.properties.name));
+        return this.plotOptions.find(option => {
+          return option.plot.properties.name ===
+            (this.chosenPlot && this.chosenPlot.properties.name);
+        });
       },
 
-      set(newPlot) {
-        if (newPlot) {
-          this.chosenPlotChanged(newPlot.feature);
+      set(option) {
+        if (option) {
+          this.chosenPlotChanged(option.plot);
         } else {
           this.chosenPlotChanged(null);
         }
