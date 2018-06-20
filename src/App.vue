@@ -1,6 +1,15 @@
 <template>
   <div>
-    <PlotMap :geoJson="geoJson"></PlotMap>
+    <!-- Le Box -->
+    <SearchBar
+      :geoJson="geoJson"
+      :chosenPlotChanged="setChosenPlot">
+    </SearchBar>
+
+    <!-- Le Map -->
+    <PlotMap
+      :geoJson="geoJson">
+    </PlotMap>
   </div>
 </template>
 
@@ -8,17 +17,20 @@
 import axios from 'axios'
 import toGeoJson from '@mapbox/togeojson'
 import PlotMap from './PlotMap.vue'
+import SearchBar from './SearchBar.vue'
 
 export default {
   name: 'app',
 
   components: {
-    PlotMap
+    PlotMap,
+    SearchBar
   },
 
   data() {
     return {
-      geoJson: null
+      geoJson: null,
+      chosenPlot: null
     }
   },
 
@@ -29,6 +41,13 @@ export default {
     }).then(res => {
       this.geoJson = toGeoJson.kml(res.data)
     });
+  },
+
+  methods: {
+    setChosenPlot(chosenPlot) {
+      this.chosenPlot = chosenPlot;
+      console.log('setChosenPlot', chosenPlot)
+    }
   }
 }
 </script>
