@@ -91,4 +91,12 @@ export default {
     border-bottom: 1px solid rgba(60, 60, 60, 0.2);
     border-radius: 0;
   }
+
+  /* Fix borked vue-select styling with non-multi-select */
+  .v-select input[type=search] {
+    position: absolute !important;
+  }
+  .v-select .dropdown-toggle .clear {
+    bottom: 4.5px !important;
+  }
 </style>
