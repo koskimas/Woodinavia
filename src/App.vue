@@ -3,6 +3,7 @@
     <!-- Le Box -->
     <SearchBar
       :geoJson="geoJson"
+      :chosenPlot="chosenPlot"
       :chosenPlotChanged="setAndFocusChosenPlot">
     </SearchBar>
 

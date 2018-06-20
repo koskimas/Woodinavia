@@ -1,28 +1,48 @@
 <template>
   <div>
-    <input v-model="searchText"/>
+    <v-select
+        v-model="plotSelectedInSearch"
+        :options="plotOptions">
+    </v-select>
   </div>
 </template>
 
 <script>
 
+import vSelect from 'vue-select'
+
 export default {
   name: 'SearchBar',
 
-  computed: {
-    searchText: {
-      set(searchText) {
-        this._searchText = searchText;
+  components: {
+    vSelect
+  },
 
-        if (searchText.length % 2 === 0) {
-          this.chosenPlotChanged(null);
-        } else {
-          this.chosenPlotChanged(this.geoJson.features.filter(it => it.geometry.type === 'Point')[0]);
-        }
+  computed: {
+    plotOptions() {
+      if (!this.geoJson) {
+        return [];
+      }
+
+      return this.geoJson.features
+        .filter(feature => feature.geometry.type === 'Point')
+        .map((feature) => {
+          // TODO richer labels
+          // TODO select with enter/whatever?
+          return {
+            feature,
+            label: feature.properties.name
+          }
+        });
+    },
+
+    plotSelectedInSearch: {
+      get() {
+        return this.plotOptions.find(option => option.label === (this.chosenPlot && this.chosenPlot.properties.name))
       },
 
-      get() {
-        return this._searchText;
+      set(newPlot) {
+        this.chosenPlotChanged(newPlot.feature);
       }
     }
   },
@@ -33,16 +53,15 @@ export default {
       default: null
     },
 
+    chosenPlot: {
+      type: Object,
+      default: null
+    },
+
     chosenPlotChanged: {
       type: Function,
       default: () => {}
     }
-  },
-
-  data() {
-    return {
-      _searchText: ""
-    };
   }
 }
 </script>
