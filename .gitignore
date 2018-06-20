@@ -1,4 +1,8 @@
 node_modules
-dist
 .cache
 package-lock.json
+
+// Don't commit the dist that gets build all the time
+dist/*
+// Allow "releasing" the static inlined HTML though
+!dist/index-inlined.html
