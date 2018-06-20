@@ -22,6 +22,11 @@ export default {
     chosenPlotChanged: {
       type: Function,
       default: () => {}
+    },
+
+    plotToFocusOn: {
+      type: Object,
+      default: null
     }
   },
 
@@ -52,6 +57,12 @@ export default {
           marker.setAnimation(null);
           marker.setZIndex(this.zIndexes[name]);
         })
+      }
+    },
+
+    plotToFocusOn(plotToFocusOn) {
+      if (plotToFocusOn) {
+        this.map.setCenter(this.markers[plotToFocusOn.properties.name].getPosition());
       }
     }
   },

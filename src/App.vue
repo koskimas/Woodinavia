@@ -14,6 +14,7 @@
     <!-- Le Map -->
     <PlotMap
       :geoJson="geoJson"
+      :plotToFocusOn="plotToFocusOn"
       :chosenPlot="chosenPlot"
       :chosenPlotChanged="setChosenPlot">
     </PlotMap>
@@ -39,7 +40,8 @@ export default {
   data() {
     return {
       geoJson: null,
-      chosenPlot: null
+      chosenPlot: null,
+      plotToFocusOn: null
     }
   },
 
@@ -55,6 +57,7 @@ export default {
   methods: {
     setChosenPlot(chosenPlot) {
       this.chosenPlot = chosenPlot;
+      this.plotToFocusOn = chosenPlot;
     }
   }
 }
