@@ -1,27 +1,34 @@
 <template>
   <div>
-    <Map></Map>
+    <PlotMap :geoJson="geoJson"></PlotMap>
   </div>
 </template>
 
 <script>
-import Map from './Map.vue'
+import axios from 'axios'
+import toGeoJson from '@mapbox/togeojson'
+import PlotMap from './PlotMap.vue'
 
 export default {
   name: 'app',
 
   components: {
-    Map
+    PlotMap
+  },
+
+  data() {
+    return {
+      geoJson: null
+    }
   },
 
   mounted() {
-
-  },
-
-  data () {
-    return {
-
-    };
+    axios({
+      url: 'https://www.google.com/maps/d/kml?forcekml=1&mid=1RWNEC7Kz-s3GvVbBN-1dqg-5f_YEKhFf',
+      responseType: 'document'
+    }).then(res => {
+      this.geoJson = toGeoJson.kml(res.data)
+    });
   }
 }
 </script>
