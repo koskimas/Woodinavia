@@ -12,16 +12,16 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.0.0",
-    "babel-plugin-es6-promise": "^1.1.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
     "parcel-bundler": "^1.9.2",
-    "parcel-plugin-vue": "^1.5.0"
+    "parcel-plugin-vue": "^1.5.0",
+    "inline-assets": "^1.2.7"
   },
   "dependencies": {
     "@mapbox/togeojson": "^0.16.0",
     "axios": "^0.18.0",
-    "es6-promise": "^4.2.4",
-    "inline-assets": "^1.2.7",
     "vue": "^2.5.16",
     "vue-select": "^2.4.0"
   }

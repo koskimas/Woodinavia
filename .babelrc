@@ -1,8 +1,15 @@
 {
   "presets": [
-    "env"
+    ["env", {
+      "useBuiltIns": true,
+      "targets": {
+        "browsers": ["ie 9"]
+      }
+    }],
+    "stage-0"
   ],
+
   "plugins": [
-    "es6-promise"
+    "transform-runtime"
   ]
 }
