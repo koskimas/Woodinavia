@@ -13,7 +13,9 @@
 
     <!-- Le Map -->
     <PlotMap
-      :geoJson="geoJson">
+      :geoJson="geoJson"
+      :chosenPlot="chosenPlot"
+      :chosenPlotChanged="setChosenPlot">
     </PlotMap>
   </div>
 </template>
@@ -53,7 +55,6 @@ export default {
   methods: {
     setChosenPlot(chosenPlot) {
       this.chosenPlot = chosenPlot;
-      console.log('setChosenPlot', chosenPlot)
     }
   }
 }
