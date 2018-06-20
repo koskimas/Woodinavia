@@ -3,7 +3,7 @@
     <!-- Le Box -->
     <SearchBar
       :geoJson="geoJson"
-      :chosenPlotChanged="setChosenPlot">
+      :chosenPlotChanged="setAndFocusChosenPlot">
     </SearchBar>
 
     <!-- Le Info -->
@@ -16,7 +16,7 @@
       :geoJson="geoJson"
       :plotToFocusOn="plotToFocusOn"
       :chosenPlot="chosenPlot"
-      :chosenPlotChanged="setChosenPlot">
+      :plotClicked="setChosenPlot">
     </PlotMap>
   </div>
 </template>
@@ -55,9 +55,13 @@ export default {
   },
 
   methods: {
+    setAndFocusChosenPlot(chosenPlot) {
+      this.setChosenPlot(chosenPlot);
+      this.plotToFocusOn = chosenPlot;
+    },
+
     setChosenPlot(chosenPlot) {
       this.chosenPlot = chosenPlot;
-      this.plotToFocusOn = chosenPlot;
     }
   }
 }

@@ -19,7 +19,7 @@ export default {
       default: null
     },
 
-    chosenPlotChanged: {
+    plotClicked: {
       type: Function,
       default: () => {}
     },
@@ -150,7 +150,12 @@ export default {
           },
 
           zIndex: this.zIndexes[plot.properties.name],
+          clickable: true,
           map: this.map
+        });
+
+        marker.addListener('click', () => {
+          this.plotClicked(plot);
         });
 
         bounds.extend(marker.getPosition());
