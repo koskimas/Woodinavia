@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist .cache && parcel build src/index.html --public-url .",
+    "build-inlined": "yarn build && yarn run inline-assets dist/index.html dist/index-inlined.html",
     "dev": "parcel src/index.html"
   },
   "author": "Jakso Oy",
@@ -20,6 +21,7 @@
     "@mapbox/togeojson": "^0.16.0",
     "axios": "^0.18.0",
     "es6-promise": "^4.2.4",
+    "inline-assets": "^1.2.7",
     "vue": "^2.5.16"
   }
 }
