@@ -31,9 +31,29 @@ export default {
           // TODO select with enter/whatever?
           return {
             feature,
-            label: feature.properties.name
+            label: buildLabel(feature)
           }
         });
+
+      function buildLabel(feature) {
+        let textInHtml = parseTextFromHtml(feature.properties.description);
+
+        if (textInHtml) {
+          return `${feature.properties.name} (${textInHtml})`;
+        } else {
+          return feature.properties.name;
+        }
+      }
+
+      function parseTextFromHtml(html) {
+        if (!html) {
+          return null;
+        }
+
+        let wrapperDiv = document.createElement('div');
+        wrapperDiv.innerHTML = html;
+        return wrapperDiv.innerText.trim();
+      }
     },
 
     plotSelectedInSearch: {
