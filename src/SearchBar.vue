@@ -64,7 +64,9 @@ export default {
 
       set(option) {
         if (option) {
-          this.chosenPlotChanged(option.plot);
+          if (!this.chosenPlot || this.chosenPlot.properties.name !== option.plot.properties.name) {
+            this.chosenPlotChanged(option.plot);
+          }
         } else {
           this.chosenPlotChanged(null);
         }
