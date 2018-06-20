@@ -58,11 +58,15 @@ export default {
 
     plotSelectedInSearch: {
       get() {
-        return this.plotOptions.find(option => option.label === (this.chosenPlot && this.chosenPlot.properties.name))
+        return this.plotOptions.find(option => option.label === (this.chosenPlot && this.chosenPlot.properties.name));
       },
 
       set(newPlot) {
-        this.chosenPlotChanged(newPlot.feature);
+        if (newPlot) {
+          this.chosenPlotChanged(newPlot.feature);
+        } else {
+          this.chosenPlotChanged(null);
+        }
       }
     }
   },
