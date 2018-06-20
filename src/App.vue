@@ -52,7 +52,7 @@ export default {
       url: 'https://www.google.com/maps/d/kml?forcekml=1&mid=1RWNEC7Kz-s3GvVbBN-1dqg-5f_YEKhFf',
       responseType: 'document'
     }).then(res => {
-      this.geoJson = toGeoJson.kml(res.data);
+      this.geoJson = mergeDuplicateFeatures(toGeoJson.kml(res.data));
 
       const plotNumber = getPlotNumberFromUrl();
 
@@ -64,6 +64,27 @@ export default {
         this.setAndFocusChosenPlot(plot);
       }
     });
+
+    function mergeDuplicateFeatures(geoJson) {
+      const featuresByName = {};
+      const deduplicatedFeatures = [];
+
+      for (const feature of geoJson.features) {
+        const previouslyEncounteredFeature = featuresByName[feature.properties.name];
+
+        if (previouslyEncounteredFeature) {
+          Object.assign(previouslyEncounteredFeature.properties, feature.properties);
+        } else {
+          featuresByName[feature.properties.name] = feature;
+          deduplicatedFeatures.push(feature);
+        }
+      }
+
+      return {
+        ...geoJson,
+        features: deduplicatedFeatures
+      };
+    }
   },
 
   methods: {
