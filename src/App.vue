@@ -2,6 +2,7 @@
   <div>
     <!-- Le Box -->
     <SearchBar
+      class="search-bar"
       :geoJson="geoJson"
       :chosenPlot="chosenPlot"
       :chosenPlotChanged="setAndFocusChosenPlot">
@@ -9,11 +10,14 @@
 
     <!-- Le Info -->
     <InfoPanel
+      class="info-panel"
+      v-if="chosenPlot"
       :chosenPlot="chosenPlot">
     </InfoPanel>
 
     <!-- Le Map -->
     <PlotMap
+      class="plot-map"
       :geoJson="geoJson"
       :plotToFocusOn="plotToFocusOn"
       :chosenPlot="chosenPlot"
@@ -21,6 +25,28 @@
     </PlotMap>
   </div>
 </template>
+
+<style lang="text/scss" scoped>
+  .search-bar {
+    height: 40px;
+  }
+
+  .info-panel {
+    height: 60vh;
+  }
+
+  .plot-map {
+    height: calc(100vh - 40px);
+  }
+
+  .info-panel ~ .plot-map {
+    height: calc(40vh - 40px);
+  }
+
+  .search-bar, .info-panel, .plot-map {
+    width: 100%;
+  }
+</style>
 
 <script>
 import axios from 'axios'
