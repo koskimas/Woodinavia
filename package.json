@@ -1,0 +1,23 @@
+{
+  "name": "woodnavia-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist .cache && parcel build src/index.html",
+    "dev": "parcel src/index.html"
+  },
+  "author": "Jakso Oy",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^2.0.0",
+    "babel-plugin-es6-promise": "^1.1.1",
+    "babel-preset-env": "^1.7.0",
+    "parcel-bundler": "^1.9.2",
+    "parcel-plugin-vue": "^1.5.0"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.4",
+    "vue": "^2.5.16"
+  }
+}
