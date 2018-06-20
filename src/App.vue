@@ -6,6 +6,11 @@
       :chosenPlotChanged="setChosenPlot">
     </SearchBar>
 
+    <!-- Le Info -->
+    <InfoPanel
+      :chosenPlot="chosenPlot">
+    </InfoPanel>
+
     <!-- Le Map -->
     <PlotMap
       :geoJson="geoJson">
@@ -18,13 +23,15 @@ import axios from 'axios'
 import toGeoJson from '@mapbox/togeojson'
 import PlotMap from './PlotMap.vue'
 import SearchBar from './SearchBar.vue'
+import InfoPanel from './InfoPanel.vue'
 
 export default {
   name: 'app',
 
   components: {
     PlotMap,
-    SearchBar
+    SearchBar,
+    InfoPanel
   },
 
   data() {
