@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-select
+        class="sharp-border-select"
         v-model="plotOptionSelectedInSearch"
         :options="plotOptions">
     </v-select>
@@ -10,6 +11,7 @@
 <script>
 
 import vSelect from 'vue-select'
+import parseTextFromHtml from './utils/parseHtml'
 
 export default {
   name: 'SearchBar',
@@ -41,16 +43,6 @@ export default {
         } else {
           return feature.properties.name;
         }
-      }
-
-      function parseTextFromHtml(html) {
-        if (!html) {
-          return null;
-        }
-
-        let wrapperDiv = document.createElement('div');
-        wrapperDiv.innerHTML = html;
-        return wrapperDiv.innerText.trim();
       }
     },
 
@@ -93,6 +85,10 @@ export default {
 }
 </script>
 
-<style lang="css">
-
+<style>
+  .sharp-border-select.v-select .dropdown-toggle {
+    border: none;
+    border-bottom: 1px solid rgba(60, 60, 60, 0.2);
+    border-radius: 0;
+  }
 </style>

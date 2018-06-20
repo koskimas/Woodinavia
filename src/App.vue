@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-layout">
     <!-- Le Box -->
     <SearchBar
       class="search-bar"
@@ -26,9 +26,14 @@
   </div>
 </template>
 
-<style lang="text/scss" scoped>
+<style scoped>
+  .main-layout {
+    border: 1px solid rgba(60, 60, 60, 0.2);
+    border-radius: 8px;
+  }
+
   .search-bar {
-    height: 40px;
+    height: 34px;
   }
 
   .info-panel {
@@ -36,11 +41,13 @@
   }
 
   .plot-map {
-    height: calc(100vh - 40px);
+    height: calc(100vh - 38px);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 
   .info-panel ~ .plot-map {
-    height: calc(40vh - 40px);
+    height: calc(40vh - 38px);
   }
 
   .search-bar, .info-panel, .plot-map {
