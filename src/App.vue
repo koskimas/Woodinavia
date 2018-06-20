@@ -28,6 +28,7 @@ import toGeoJson from '@mapbox/togeojson'
 import PlotMap from './PlotMap.vue'
 import SearchBar from './SearchBar.vue'
 import InfoPanel from './InfoPanel.vue'
+import queryString from 'query-string'
 
 export default {
   name: 'app',
@@ -51,7 +52,17 @@ export default {
       url: 'https://www.google.com/maps/d/kml?forcekml=1&mid=1RWNEC7Kz-s3GvVbBN-1dqg-5f_YEKhFf',
       responseType: 'document'
     }).then(res => {
-      this.geoJson = toGeoJson.kml(res.data)
+      this.geoJson = toGeoJson.kml(res.data);
+
+      const plotNumber = getPlotNumberFromUrl();
+
+      if (plotNumber !== null) {
+        const plot = this.geoJson.features.find(feature => {
+          return feature.properties.name === '#' + plotNumber;
+        });
+
+        this.setAndFocusChosenPlot(plot);
+      }
     });
   },
 
@@ -66,6 +77,23 @@ export default {
     }
   }
 }
+
+function getPlotNumberFromUrl() {
+  const url = findUrl();
+
+  if (!url) {
+    return null;
+  }
+
+  return queryString.parseUrl(url).query.plotNumber || null;
+}
+
+function findUrl() {
+  return (window.location != window.parent.location)
+    ? document.referrer
+    : document.location.href;
+}
+
 </script>
 
 <style lang="css">

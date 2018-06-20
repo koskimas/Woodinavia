@@ -32,37 +32,20 @@ export default {
 
   watch: {
     geoJson(geoJson) {
-      if (this.map && geoJson) {
-        this.redraw();
+      if (this.map) {
+        this.init();
       }
     },
 
     chosenPlot(chosenPlot) {
-      console.log('map chosen plot changed', chosenPlot)
-
-      if (chosenPlot) {
-        const chosenName = chosenPlot.properties.name;
-
-        Object.entries(this.markers).forEach(([name, marker]) => {
-          if (name === chosenName) {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-            marker.setZIndex(HUGE_Z_INDEX);
-          } else {
-            marker.setAnimation(null)
-            marker.setZIndex(this.zIndexes[name]);
-          }
-        })
-      } else {
-        Object.entries(this.markers).forEach(([name, marker]) => {
-          marker.setAnimation(null);
-          marker.setZIndex(this.zIndexes[name]);
-        })
+      if (this.map && this.geoJson) {
+        this.choosePlot(chosenPlot);
       }
     },
 
     plotToFocusOn(plotToFocusOn) {
-      if (plotToFocusOn) {
-        this.map.setCenter(this.markers[plotToFocusOn.properties.name].getPosition());
+      if (this.map && this.geoJson) {
+        this.focusPlot(plotToFocusOn);
       }
     }
   },
@@ -87,17 +70,30 @@ export default {
       this.map.setMapTypeId('satellite');
 
       if (this.geoJson) {
-        this.redraw();
+        this.init();
       }
     });
   },
 
   methods: {
-    redraw() {
-      const google = this.google;
+    init() {
+      this.redrawMap(this.geoJson);
 
-      const forest = this.geoJson.features.find(it => it.geometry.type === 'Polygon');
-      const plots = this.geoJson.features.filter(it => it.geometry.type === 'Point');
+      if (this.chosenPlot) {
+        this.choosePlot(this.chosenPlot);
+      }
+
+      if (this.plotToFocusOn) {
+        this.focusPlot(this.plotToFocusOn);
+      }
+    },
+
+    redrawMap(geoJson) {
+      geoJson = geoJson || { features: [] };
+
+      const google = this.google;
+      const forest = geoJson.features.find(it => it.geometry.type === 'Polygon');
+      const plots = geoJson.features.filter(it => it.geometry.type === 'Point');
       const bounds = new google.maps.LatLngBounds();
 
       if (this.forestPoly) {
@@ -167,6 +163,33 @@ export default {
       })
 
       this.map.fitBounds(bounds);
+    },
+
+    choosePlot(chosenPlot) {
+      if (chosenPlot) {
+        const chosenName = chosenPlot.properties.name;
+
+        Object.entries(this.markers).forEach(([name, marker]) => {
+          if (name === chosenName) {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            marker.setZIndex(HUGE_Z_INDEX);
+          } else {
+            marker.setAnimation(null)
+            marker.setZIndex(this.zIndexes[name]);
+          }
+        })
+      } else {
+        Object.entries(this.markers).forEach(([name, marker]) => {
+          marker.setAnimation(null);
+          marker.setZIndex(this.zIndexes[name]);
+        })
+      }
+    },
+
+    focusPlot(plotToFocusOn) {
+      if (plotToFocusOn) {
+        this.map.setCenter(this.markers[plotToFocusOn.properties.name].getPosition());
+      }
     }
   }
 }

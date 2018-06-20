@@ -22,6 +22,7 @@
   "dependencies": {
     "@mapbox/togeojson": "^0.16.0",
     "axios": "^0.18.0",
+    "query-string": "^6.1.0",
     "vue": "^2.5.16",
     "vue-select": "^2.4.0"
   }
