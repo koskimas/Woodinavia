@@ -94,14 +94,14 @@
   }
 
   .no-photo-placeholder .search-radar {
-    padding: 60px;
+    padding: 50px;
     border: 2px solid #2588ce;
     border-radius: 50%;
     background-color: #2588ce91;
   }
 
   .no-photo-placeholder .unknown-face {
-    width: 30vw;
+    width: 25vw;
     border: 2px solid #fafafa;
     border-radius: 50%;
 
