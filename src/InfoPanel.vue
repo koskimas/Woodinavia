@@ -2,8 +2,22 @@
   <div>
     <div class="customer-info-wrapper">
       <div class="customer-info">
-        <div class="photo"
-           v-bind:style="customerImageBackgroundStyle">
+        <div class="top-part">
+          <div class="photo"
+               v-show="hasPhoto"
+               v-bind:style="customerImageBackgroundStyle">
+          </div>
+
+          <div class="no-photo-placeholder"
+               v-show="!hasPhoto">
+
+            <p class="add-instructions">
+              No photo submitted for this plot.
+              <br>
+              <a :href="photoSubmitMailtoUrl">
+                Email it to us</a> and we will add it.
+            </p>
+          </div>
         </div>
 
         <div class="name">
@@ -35,18 +49,27 @@
     box-shadow: 0px 2px 1px rgba(60, 60, 60, 0.5);
   }
 
-  .photo {
+  .top-part {
     flex: 1 1 auto;
-
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 
     /* Ehhh... why is this needed? */
     margin-top: -1px;
+
+    display: flex;
+  }
+
+  .photo {
+    flex: 1 1 auto;
+
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .name {
@@ -64,8 +87,16 @@ export default {
   name: 'InfoPanel',
 
   computed: {
+    plotId() {
+      return this.chosenPlot.properties.name;
+    },
+
+    hasPhoto() {
+      return !!this.chosenPlot.properties.gx_media_links;
+    },
+
     customerImageBackgroundStyle() {
-      if (this.chosenPlot.properties.gx_media_links) {
+      if (this.hasPhoto) {
         return {
           backgroundImage: `url('${this.chosenPlot.properties.gx_media_links}')`
         };
@@ -75,16 +106,19 @@ export default {
     },
 
     plotName() {
-      const plotId = this.chosenPlot.properties.name;
       const plotHtmlDescription = this.chosenPlot.properties.description;
 
       let textInHtml = parseTextFromHtml(plotHtmlDescription);
 
       if (textInHtml) {
-        return `${textInHtml}, ${plotId}`;
+        return `${textInHtml}, ${this.plotId}`;
       } else {
-        return plotId;
+        return this.plotId;
       }
+    },
+
+    photoSubmitMailtoUrl() {
+      return `mailto:info@woodinavia.com?subject=Forest Owner Name and Selfie for Plot ${this.plotId}`;
     }
   },
 
