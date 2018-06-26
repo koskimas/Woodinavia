@@ -33,15 +33,15 @@
   }
 
   .search-bar {
-    height: 34px;
+    height: 40px;
   }
 
   .info-panel {
-    height: 60vh;
+    height: calc(60vh - 6px);
   }
 
   .plot-map {
-    height: calc(100vh - 38px);
+    height: calc(100vh - 44px);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }

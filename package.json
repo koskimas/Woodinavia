@@ -25,6 +25,6 @@
     "normalize.css": "^8.0.0",
     "query-string": "^6.1.0",
     "vue": "^2.5.16",
-    "vue-select": "^2.4.0"
+    "vue-multiselect": "^2.1.0"
   }
 }

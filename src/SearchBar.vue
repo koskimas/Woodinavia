@@ -1,23 +1,27 @@
 <template>
   <div>
-    <v-select
-        class="sharp-border-select"
-        v-model="plotOptionSelectedInSearch"
-        :options="plotOptions">
-    </v-select>
+    <multiselect
+      v-model="plotOptionSelectedInSearch"
+      :options="plotOptions"
+      placeholder="Search"
+      label="label"
+      track-by="label"
+      :showLabels="false">
+    </multiselect>
   </div>
 </template>
 
 <script>
 
-import vSelect from 'vue-select'
+import Multiselect from 'vue-multiselect'
 import parseTextFromHtml from './utils/parseHtml'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 export default {
   name: 'SearchBar',
 
   components: {
-    vSelect
+    Multiselect
   },
 
   computed: {
@@ -86,17 +90,16 @@ export default {
 </script>
 
 <style>
-  .sharp-border-select.v-select .dropdown-toggle {
-    border: none;
-    border-bottom: 1px solid rgba(60, 60, 60, 0.2);
-    border-radius: 0;
+  .multiselect__tags {
+    border-radius: 0px;
   }
 
-  /* Fix borked vue-select styling with non-multi-select */
-  .v-select input[type=search] {
-    position: absolute !important;
+  .multiselect .multiselect__option--selected {
+    background: #2588ce91;
+    color: #fff;
   }
-  .v-select .dropdown-toggle .clear {
-    bottom: 4.5px !important;
+
+  .multiselect .multiselect__option--highlight {
+    background: #2588ce91;
   }
 </style>
