@@ -20,7 +20,7 @@
             <p class="add-instructions">
               No photo submitted for this plot.
               <br>
-              <a :href="photoSubmitMailtoUrl">
+              <a :href="photoSubmitMailtoUrl" target="_parent">
                 Email your selfie to us</a> and we will add it.
             </p>
           </div>
