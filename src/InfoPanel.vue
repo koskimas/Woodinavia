@@ -11,11 +11,17 @@
           <div class="no-photo-placeholder"
                v-show="!hasPhoto">
 
+            <div class="fill-space-center">
+              <div class="search-radar">
+                <div class="unknown-face"></div>
+              </div>
+            </div>
+
             <p class="add-instructions">
               No photo submitted for this plot.
               <br>
               <a :href="photoSubmitMailtoUrl">
-                Email it to us</a> and we will add it.
+                Email your selfie to us</a> and we will add it.
             </p>
           </div>
         </div>
@@ -72,10 +78,63 @@
     background-position: center;
   }
 
+  .no-photo-placeholder {
+    flex: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .fill-space-center {
+    flex: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .no-photo-placeholder .search-radar {
+    padding: 60px;
+    border: 2px solid #2588ce;
+    border-radius: 50%;
+    background-color: #2588ce91;
+  }
+
+  .no-photo-placeholder .unknown-face {
+    width: 30vw;
+    border: 2px solid #fafafa;
+    border-radius: 50%;
+
+    background-image: url('https://cdn.rawgit.com/koskimas/Woodinavia/ff221d595e032b26169133b5bfeb178257294b28/assets/unknown_face.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #3f3c38;
+  }
+
+  .no-photo-placeholder .unknown-face::before {
+    display: block;
+    content: ' ';
+    margin-top: 100%
+  }
+
+  .no-photo-placeholder a {
+    color: #a26b25 !important;
+    text-decoration: none !important;
+  }
+
+  .no-photo-placeholder a:hover {
+    color: #1c1d1d !important;
+  }
+
   .name {
     padding: 0.666rem;
     font-size: 125%;
     margin-top: 0.25rem;
+  }
+
+  .add-instructions {
+    text-align: center;
   }
 </style>
 
