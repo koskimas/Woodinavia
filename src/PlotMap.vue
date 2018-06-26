@@ -64,7 +64,12 @@ export default {
       this.google = google;
 
       this.map = new google.maps.Map(this.$refs.plotMap, {
-        zoom: 4
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: true,
+        fullscreenControl: false
       });
 
       this.map.setMapTypeId('satellite');
@@ -130,10 +135,10 @@ export default {
 
       this.forestPoly = new google.maps.Polygon({
         paths: forestCoords,
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#FF0000',
+        strokeColor: '#000000',
+        strokeOpacity: 0.7,
+        strokeWeight: 1,
+        fillColor: '#000000',
         fillOpacity: 0.35,
         map: this.map
       });
@@ -147,7 +152,14 @@ export default {
 
           zIndex: this.zIndexes[plot.properties.name],
           clickable: true,
-          map: this.map
+          map: this.map,
+          icon: {
+            url: 'https://cdn.rawgit.com/koskimas/Woodinavia/598f9f354b538c67db30a9187925b2166d7efc55/assets/tree.png',
+            size: new google.maps.Size(56, 56),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(28, 28),
+            scaledSize: new google.maps.Size(28, 28)
+          }
         });
 
         marker.addListener('click', () => {
@@ -158,9 +170,11 @@ export default {
         this.markers[plot.properties.name] = marker;
       });
 
+      /*
       forestCoords.forEach(coord => {
         bounds.extend(coord);
       })
+      */
 
       this.map.fitBounds(bounds);
     },
