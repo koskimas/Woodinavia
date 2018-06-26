@@ -1,6 +1,7 @@
 node_modules
 .cache
 package-lock.json
+.env
 
 // Don't commit the dist that gets build all the time
 dist/*

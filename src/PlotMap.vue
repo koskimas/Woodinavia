@@ -60,7 +60,16 @@ export default {
   },
 
   mounted() {
-    window.woodinavia.googleMapsPromise.then(google => {
+    if (!window.woodiNaviaGoogleMapsPromise) {
+      window.woodinaviaInitGoogleMap = null;
+      window.woodiNaviaGoogleMapsPromise = new Promise(resolve => window.woodinaviaInitGoogleMap = resolve);
+
+      const googleMaps = document.createElement('script');
+      googleMaps.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_KEY}&callback=woodinaviaInitGoogleMap`);
+      document.body.appendChild(googleMaps);
+    }
+
+    window.woodiNaviaGoogleMapsPromise.then(() => {
       this.google = google;
 
       this.map = new google.maps.Map(this.$refs.plotMap, {
