@@ -135,6 +135,7 @@
 
   .add-instructions {
     text-align: center;
+    line-height: 1.3;
   }
 </style>
 
