@@ -151,7 +151,7 @@ function findUrl() {
 </script>
 
 <style lang="css">
-  #app {
-
+  body {
+    font-family: 'Lato', sans-serif;
   }
 </style>
