@@ -153,5 +153,6 @@ function findUrl() {
 <style lang="css">
   body {
     font-family: 'Lato', sans-serif;
+    overflow: hidden !important;
   }
 </style>
