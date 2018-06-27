@@ -91,7 +91,7 @@ export default {
 
 <style>
   .multiselect__tags {
-    border-radius: 0px;
+    border-radius: 8px 8px 0 0;
   }
 
   .multiselect .multiselect__option--selected {

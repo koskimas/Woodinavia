@@ -38,6 +38,9 @@
   .customer-info-wrapper {
     padding: 10px;
     width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+
     height: 100%;
     box-sizing: border-box;
     display: flex;
@@ -75,7 +78,7 @@
 
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 50% 10%;
   }
 
   .no-photo-placeholder {
@@ -94,14 +97,14 @@
   }
 
   .no-photo-placeholder .search-radar {
-    padding: 50px;
+    padding: 66px;
     border: 2px solid #2588ce;
     border-radius: 50%;
     background-color: #2588ce91;
   }
 
   .no-photo-placeholder .unknown-face {
-    width: 25vw;
+    width: 80px;
     border: 2px solid #fafafa;
     border-radius: 50%;
 
@@ -134,6 +137,7 @@
   }
 
   .add-instructions {
+    margin: 10px 0;
     text-align: center;
     line-height: 1.3;
   }
